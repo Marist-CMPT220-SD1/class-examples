@@ -6,7 +6,7 @@ package structures;
 // Technically, we say that the interface
 // is parameterized by type T
 // T is a type parameter
-*
+
 /**
  * A simple LIFO (last-in, first out) data structure.
  * Operations on a stack take a constant amount of time, regardless of the

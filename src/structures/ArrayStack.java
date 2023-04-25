@@ -21,7 +21,7 @@ public class ArrayStack<T> implements Stack<T> {
 
     @Override
     public void push(T value) {
-        if (size >= elements.length) {
+        if (isFull()) {
             T[] temp = (T[]) new Object[elements.length * 2];
             System.arraycopy(elements, 0, temp, 0, elements.length);
             elements = temp;
@@ -33,11 +33,15 @@ public class ArrayStack<T> implements Stack<T> {
 
     @Override
     public T pop() {
+        if (isEmpty())
+            return null; // TODO maybe throw exception instead
         return elements[--size];
     }
 
     @Override
     public T peek() {
+        if (isEmpty())
+            return null; // TODO maybe throw exception instead
         return elements[size - 1];
     }
 
@@ -61,12 +65,13 @@ public class ArrayStack<T> implements Stack<T> {
     public static void main(String[] args) {
         ArrayStack<Integer> s = new ArrayStack<>(); // concrete classes can be instantiated
 
-        s.push(Integer.valueOf(5)); // creates a new Integer object
-        s.push(Integer.valueOf(2));
-        s.push(Integer.valueOf(8));
-        s.push(Integer.valueOf(15));
+        s.push(5); // creates a new Integer object
+        s.push(2);
+        s.push(8);
+        s.push(15);
 
         System.out.println(s.isEmpty()); // should print `false`
+        System.out.println(s.getSize()); // should print `4`
 
         while (!s.isEmpty()) {
             System.out.println(s.peek()); // should print each element from to top to bottom
