@@ -10,7 +10,7 @@ enum KnockPattern {PALINDROME, MOSTLY_KNOCKS, MOSTLY_PAUSES}
  */
 public class KnockQueue {
 
-    private LinkedQueue<Knock> knocks;
+    private ArrayQueue<Knock> knocks;
 
     /**
      * Adds a knock to the queue
@@ -21,23 +21,23 @@ public class KnockQueue {
     }
 
     public KnockQueue(){
-        this.knocks = new LinkedQueue<>();
+        this.knocks = new ArrayQueue<>();
     }
     /**
      * Realizes the knock pattern clearing it from history
      * @return the KnockPattern
      */
     public KnockPattern getType(){
-        Queue<Knock> knocksQueueCopy = new LinkedQueue<>();
+        Queue<Knock> knocksQueueCopy = new ArrayQueue<>();
         Stack<Knock> knocksStackCopy = new ArrayStack<>();
         int knockCounter = 0;
         int pauseCounter = 0;
         //knocksStack
-        while(!knocks.empty()){
+        while(!knocks.isEmpty()){
             Knock knock = knocks.dequeue();
             knocksQueueCopy.enqueue(knock);
             knocksStackCopy.push(knock);
-            if(knock != Knock.NONE){
+            if(knock != Knock.NONE){ // TODO Fix the error in this test
                 pauseCounter++;
             }else{
                 knockCounter++;
@@ -45,14 +45,13 @@ public class KnockQueue {
         }
         // check for palindrome
         boolean isPalindrome = true;
-        while(!knocksQueueCopy.empty()){
-            if(knocksQueueCopy.dequeue() == knocksStackCopy.pop()) {
+        while(!knocksQueueCopy.isEmpty()){
+            if(knocksQueueCopy.dequeue() == knocksStackCopy.pop()) { // TODO Fix the error in this test
                 isPalindrome = false;
                 break;
             }
         }
         if(isPalindrome) return KnockPattern.PALINDROME;
-
         return knockCounter > pauseCounter ? KnockPattern.MOSTLY_KNOCKS: KnockPattern.MOSTLY_PAUSES;
     }
 

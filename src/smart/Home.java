@@ -9,12 +9,13 @@ public class Home {
         Countertop Countertop = new Countertop();
         Lighting Lighting = new Lighting();
         Curtains Curtains = new Curtains();
-        KnockQueue knocking = new KnockQueue();
+        KnockQueue knocking = new KnockQueue(); // TODO Remove this unnecessary variable
         int knock = -1;
 
         Countertop.subscribe(Lighting);
         Countertop.subscribe(Curtains);
         Countertop.subscribe(Oven);
+        // TODO Knock on the countertop (instead of adding directly to a knock queue)
         for (int i = 0; i < 5; i++) {
             System.out.println("INPUT A KNOCK:\n0 : No Knock\n1 : Light Knock\n2 : Hard Knock");
             knock = input.nextInt();
